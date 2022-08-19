@@ -4,8 +4,8 @@ function AddEditRecipeForm({
   existingRecipe,
   handleAddRecipe,
   handleUpdateRecipe,
-  handleEditRecipeCancel,
   handleDeleteRecipe,
+  handleEditRecipeCancel,
 }) {
   useEffect(() => {
     if (existingRecipe) {
@@ -32,7 +32,7 @@ function AddEditRecipeForm({
     e.preventDefault();
 
     if (ingredients.length === 0) {
-      alert("Ingredients cannot be emply, please add at least 1 ingredient.");
+      alert("Ingredients cannot be empty. Please add at least 1 ingredient");
       return;
     }
 
@@ -60,6 +60,7 @@ function AddEditRecipeForm({
     if (e.key && e.key !== "Enter") {
       return;
     }
+
     e.preventDefault();
 
     if (!ingredientName) {
@@ -69,6 +70,14 @@ function AddEditRecipeForm({
 
     setIngredients([...ingredients, ingredientName]);
     setIngredientName("");
+  }
+
+  function handleDeleteIngredient(ingredientName) {
+    const remainingIngredients = ingredients.filter((ingredient) => {
+      return ingredient !== ingredientName;
+    });
+
+    setIngredients(remainingIngredients);
   }
 
   function resetForm() {
@@ -93,9 +102,7 @@ function AddEditRecipeForm({
               type="text"
               required
               value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
+              onChange={(e) => setName(e.target.value)}
               className="input-text"
             />
           </label>
@@ -126,7 +133,7 @@ function AddEditRecipeForm({
               value={directions}
               onChange={(e) => setDirections(e.target.value)}
               className="input-text directions"
-            />
+            ></textarea>
           </label>
           <label className="recipe-label input-label">
             Publish Date:
@@ -159,6 +166,7 @@ function AddEditRecipeForm({
                         <button
                           type="button"
                           className="secondary-button ingredient-delete-button"
+                          onClick={() => handleDeleteIngredient(ingredient)}
                         >
                           Delete
                         </button>
@@ -209,9 +217,9 @@ function AddEditRecipeForm({
               Cancel
             </button>
             <button
-              className="primary-button action-button"
               type="button"
               onClick={() => handleDeleteRecipe(existingRecipe.id)}
+              className="primary-button action-button"
             >
               Delete
             </button>

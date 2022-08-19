@@ -23,7 +23,7 @@ function LoginForm({ existingUser }) {
 
   async function handleSendResetPasswordEmail() {
     if (!username) {
-      alert("Missing Username!");
+      alert("Missing username!");
       return;
     }
 
@@ -34,14 +34,6 @@ function LoginForm({ existingUser }) {
       alert(error.message);
     }
   }
-
-  //   async function handleLoginWithGoogle() {
-  //     try {
-  //       await FirebaseAuthService.loginWithGoogle();
-  //     } catch (error) {
-  //       alert(error.message);
-  //     }
-  //   }
 
   return (
     <div className="login-form-container">
@@ -64,9 +56,7 @@ function LoginForm({ existingUser }) {
               type="email"
               required
               value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              onChange={(e) => setUsername(e.target.value)}
               className="input-text"
             />
           </label>
@@ -76,9 +66,7 @@ function LoginForm({ existingUser }) {
               type="password"
               required
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
               className="input-text"
             />
           </label>
@@ -91,13 +79,6 @@ function LoginForm({ existingUser }) {
             >
               Reset Password
             </button>
-            {/* <button
-              type="button"
-              onClick={handleLoginWithGoogle}
-              className="primary-button"
-            >
-              Login with Google
-            </button> */}
           </div>
         </form>
       )}
